@@ -16,7 +16,7 @@ class Computer(Player):
         super().__init__(later, name)
 
     def get_move(self, game):
-        sleep(3)
+        sleep(1.5)
         return random.choice(game.available_moves)
 
 
