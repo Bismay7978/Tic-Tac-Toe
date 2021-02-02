@@ -43,12 +43,12 @@ class tictactoe:
     def num_of_available_moves(self):
         return len(self.available_moves)
 
-    def make_move(self, square: int, later: str):
+    def make_move(self, square: int, plr):
         if self.bord[square-1] == ' ':
-            self.bord[square-1] = later.upper()
+            self.bord[square-1] = plr.later.upper()
             self.available_moves.remove(square)
-            if self.check_winer(square, later):
-                self.current_winer = later.upper()
+            if self.check_winer(square, plr.later):
+                self.current_winer = plr.name
             return True
         else:
             print("The move has been used try another available move")
@@ -65,25 +65,26 @@ def play(game, x_player, y_player, print_bord=True):
             square = x_player.get_move(game)
         else:
             square = y_player.get_move(game)
-        if game.make_move(square, plr.later):
+        if game.make_move(square, plr):
             if print_bord:
                 system('cls')
-                print(f"{plr.later} player make move to {square}")
+                print(f"{plr.name} make move to {square}")
                 game.print_num_bord()
                 print()
                 game.print_bord()
         else:
             continue
         if game.current_winer:
-            print(f"The {game.current_winer} player win the match")
+            print(f"The {game.current_winer} win the match")
             return
         plr = x_player if plr == y_player else y_player
 
 
 if __name__ == '__main__':
     t = tictactoe()
-    x_player = Human_player('X')
-    y_player = Computer('O')
+    name = input("Enter your good name\n")
+    x_player = Human_player('X', name)
+    y_player = Computer('O', 'Computer')
     while True:
         play(t, x_player, y_player)
         play_again = input("You want to play again (Y/N)\n")
