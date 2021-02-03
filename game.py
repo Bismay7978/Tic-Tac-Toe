@@ -78,6 +78,8 @@ def play(game, x_player, y_player, print_bord=True):
             print(f"The {game.current_winer} win the match")
             return
         plr = x_player if plr == y_player else y_player
+    if not game.current_winer:
+        print("The game is tie")
 
 
 if __name__ == '__main__':
